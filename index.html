@@ -6,6 +6,7 @@
     <title>Wyszukiwarka Filmów</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="images/LogoUR.svg.ico">
 </head>
 <body>
     <div class="container">
@@ -15,6 +16,18 @@
                 <form id="form">
                     <input type="text" class="form-control" id="search" placeholder="Podaj tytuł filmu">
                     <input type="submit" class="btn btn-danger" value="🔎" id="search_icon">
+                    <div id="filters">
+                        <!--<label for="upload-range" class="form-label">Data publikacji</label>
+                        <input type="range" class="form-range" id="upload-range" value="2023-12-01" min="2023-12-01" max="2018-01-01" oninput="this.nextElementSibling.value = this.value">
+                        <output id="upload-range-output">2023-12-01</output>-->
+                        <label for="upload-range" class="form-label">Data publikacji</label>
+                        <p>(Powstałe przed tą datą)</p>
+                        <input type="date" id="upload-range" name="upload-range" value="2024-01-06" min="2018-01-01" max="2024-01-06">
+
+                        <label for="max-results" class="form-label">Ilość wyników</label>
+                        <input type="range" class="form-range" id="max-results" value="5" min="1" max="10" step="1" oninput="this.nextElementSibling.value = this.value">
+                        <output id="max-results-output">5</output>
+                    </div>
                 </form>
                 <!--<button>Filtry</button>
                 <ul id="filtry">
@@ -22,18 +35,18 @@
                         <input type="range">
                     </li>
                 </ul>-->
+                <p id="description"></p>
             </div>
-        </section>
-        <section id="results">
-            <div class="searchresults">
-
+            <div id="filtry">
+                <button onclick="filtry()" id="filtry-button">Filtry</button>
             </div>
+            <hr>
         </section>
         <section id="player">
             <div class="row">
                 <div class="col-md-12">
                     <div id="videos">
-
+                        
                     </div>
                 </div>
             </div>

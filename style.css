@@ -29,27 +29,136 @@ h1{
     display: flex;
     justify-content: center;
     text-align: center;
+    transition: all 0.3s;
 }
 h1 b{
     font-weight: 500;
     color: rgb(197, 75, 75);
 }
+h1:hover{
+    transition: all 0.3s;
+    letter-spacing: 1px;
+}
 #form{
-    width: 30%;
+    transition: all 0.3s;
+    width: 50%;
     display: flex;
     margin-left: auto;
     margin-right: auto;
 }
+
 #search_icon{
+    border-radius: 0% 30% 30% 0%;
     display: flex;
     align-items: center;
 }
+#search{
+    border-radius: 10px 0% 0% 10px;
+    transition: all 0.3s;
+}
+
+#filters{
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.466);
+    margin-top: 100px;
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 600;
+}
+#filters input{
+    width: auto;
+}
+#filters output{
+    color: white;
+    text-align: center;
+}
+#filters p{
+    color: rgb(107, 107, 107);
+    padding: 0;
+    margin: 0;
+}
+#upload-range{
+    margin-bottom: 20px;
+}
+
+#form label{
+    color: white;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 #filtry{
-    display: none;
+    display: flex;
+    justify-content: center;
 }
-#filtry li{
-    list-style: none;
+#filtry-button{
+    border: 0;
+    border-radius: 50px;
+    transition: all 0.2s;
+    width: 50px;
+}
+#filtry-button:hover{
+    width: 70px;
+    transition: all 0.2s;
+    background-color: grey;
+}
+
+#description{
+    display: flex;
+    color: white;
+    text-align: center;
+}
+hr{
+    width: 100%;
+    color: black;
+    margin-top: 30px;
+}
+#videos{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 20px;
+    justify-self: center;
+    align-self: center;
+}
+
+
+@media (max-width: 480px){
+    h1{
+        font-size: 100%;
+    }
+}
+@media (max-width:240px){
+    h1{
+        display: block;
+    }
+}
+@media(max-width: 370px){
+    #form{
+        display: block;
+    }
+    #search_icon{
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+@media(max-width:1600px){
+    #videos{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media(max-width:1130px){
+    #videos{
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 
