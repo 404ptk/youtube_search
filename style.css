@@ -52,6 +52,10 @@ h1:hover{
     display: flex;
     align-items: center;
 }
+#search_icon:hover{
+    border: 1px solid rgb(73, 4, 8);
+    background-color: rgb(73, 4, 8);
+}
 #search{
     border-radius: 10px 0% 0% 10px;
     transition: all 0.3s;
@@ -98,12 +102,13 @@ h1:hover{
     border: 0;
     border-radius: 50px;
     transition: all 0.2s;
-    width: 50px;
+    width: 70px;
 }
 #filtry-button:hover{
-    width: 70px;
+    width: 80px;
     transition: all 0.2s;
-    background-color: grey;
+    border: 1px solid rgb(73, 4, 8);
+    background-color: rgb(73, 4, 8);
 }
 
 #description{

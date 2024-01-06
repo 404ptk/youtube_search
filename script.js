@@ -10,11 +10,12 @@ $(document).ready(function(){
 
         var search = $("#search").val()
         var results = $("#max-results").val()
-        var before_date = $("#upload-range").val()
+        var before_date = $("#upload-range").val() + "T00:00:00Z"
+        //console.log(before_date) f.ex. log: 2024-01-03T00:00:00Z
 
         $("#videos").empty();
 
-        videoSearch(API_KEY, search, results)
+        videoSearch(API_KEY, search, results, before_date)
     })
     // $("#form").submit(function(event){
     //     event.preventDefault();
@@ -23,10 +24,11 @@ $(document).ready(function(){
     //     $("<p>Wyniki wyszukiwania dla</p>").insertAfter("#form");
     // })
 
-    function videoSearch(key, search, maxResults){
+    function videoSearch(key, search, maxResults, before_date){
         $.get("https://www.googleapis.com/youtube/v3/search?key=" + key
         + "&type=video&part=snippet&maxResults=" + maxResults  
-        + "&q=" + search + "&order=viewCount", function(data) {
+        + "&order=viewCount" + "&publishedBefore=" + before_date
+        + "&q=" + search, function(data) {
             console.log(data)
             let videoslist = data.items
 
@@ -43,11 +45,13 @@ $(document).ready(function(){
         })
     }
 })
+
+const menu_filtrow = document.getElementById("filters");
+menu_filtrow.style.display = "none"
 function filtry(){
-    const element = document.getElementById("filters");
-        if (element.style.display == "none") {
-            element.style.display = "flex";
+        if (menu_filtrow.style.display == "none") {
+            menu_filtrow.style.display = "flex";
         } else {
-            element.style.display = "none";
+            menu_filtrow.style.display = "none";
         }
 }
