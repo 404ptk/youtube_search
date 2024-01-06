@@ -4,10 +4,11 @@ body{
     height: 100%;
     background: linear-gradient(300deg,#695f5f,#0c0b0b);
     background-size: 120% 120%;
-    animation: gradient-animation 10s ease infinite;
+    animation: gradient-animation 5s ease infinite;
     font-family: system-ui;
     background-size: cover;
     background-attachment: fixed;
+
 }
 .container{
     margin: 0;
@@ -62,6 +63,8 @@ h1:hover{
 }
 
 #filters{
+    top: 0;
+    left: 0;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.466);
     margin-top: 100px;
@@ -99,8 +102,7 @@ h1:hover{
     justify-content: center;
 }
 #filtry-button{
-    border: 0;
-    border-radius: 50px;
+    border-radius: 20px;
     transition: all 0.2s;
     width: 70px;
 }
@@ -125,8 +127,7 @@ hr{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 20px;
-    justify-self: center;
-    align-self: center;
+    place-items: center;
 }
 
 
@@ -148,7 +149,13 @@ hr{
         display: flex;
         margin-left: auto;
         margin-right: auto;
+        margin-top: 10px;
+        border-radius: 10px;
     }
+    #search{
+        border-radius: 10px;
+    }
+    
 }
 @media(max-width:1600px){
     #videos{
