@@ -56,3 +56,13 @@ function filtry() {
         menu_filtrow.style.display = "none";
     }
 }
+
+var contact = document.getElementById("formularz");
+contact.style.display = "none";
+function contact_form(){
+    if(contact.style.display == "none"){
+        contact.style.display = "block";
+    }else{
+        contact.style.display = "none";
+    }
+}

@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/LogoUR.svg.ico">
 </head>
-<body>
+<body id="top">
     <div class="container">
         <div class="navbar">
             <ul>
                 <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
                 <li><a href="https://github.com/404ptk" target="_blank">Github</a></li>
-                <li><a href="#formularz">Kontakt</a></li>
+                <li><a href="#formularz"><button onclick="contact_form()">Kontakt</button></a></li>
             </ul>
         </div>
         <section id="searching">
@@ -49,14 +49,17 @@
                 </div>
             </div>
         </section>
+        <section id="zgloszenie">
+
+        </section>
         <section id="formularz">
             <form action="" id="kontakt">
                 <h1>Formularz kontaktowy</h1>
-                <input type="text" class="form-control" placeholder="Imię" id="imie" name="imie">
-                <input type="text" class="form-control" placeholder="Nazwisko" id="nazwisko" name="nazwisko">
+                <input type="text" class="form-control" placeholder="Imię" id="name" name="name">
+                <input type="text" class="form-control" placeholder="Nazwisko" id="surname" name="surname">
                 <input type="mail" class="form-control" placeholder="Adres email" name="mail" id="mail">
                 <textarea class="form-control" rows="3" placeholder="Treść wiadomości"></textarea>
-                <input type="" name="" id="">
+                <input type="file" name="file" id="file" class="btn btn-danger">
             </form>
         </section>
     </div>
