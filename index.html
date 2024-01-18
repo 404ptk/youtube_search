@@ -10,6 +10,13 @@
 </head>
 <body>
     <div class="container">
+        <div class="navbar">
+            <ul>
+                <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
+                <li><a href="https://github.com/404ptk" target="_blank">Github</a></li>
+                <li><a href="#formularz">Kontakt</a></li>
+            </ul>
+        </div>
         <section id="searching">
             <h1>Wyszukaj film w serwisie&nbsp;<b>YouTube</b></h1>
             <div class="search">
@@ -17,9 +24,6 @@
                     <input type="text" class="form-control" id="search" placeholder="Podaj tytuł filmu">
                     <input type="submit" class="btn btn-danger" value="🔎" id="search_icon">
                     <div id="filters">
-                        <!--<label for="upload-range" class="form-label">Data publikacji</label>
-                        <input type="range" class="form-range" id="upload-range" value="2023-12-01" min="2023-12-01" max="2018-01-01" oninput="this.nextElementSibling.value = this.value">
-                        <output id="upload-range-output">2023-12-01</output>-->
                         <label for="upload-range" class="form-label">Data publikacji</label>
                         <p>(Powstałe przed tą datą)</p>
                         <input type="date" id="upload-range" name="upload-range" value="2024-01-06" min="2018-01-01" max="2024-01-06">
@@ -29,12 +33,6 @@
                         <output id="max-results-output">5</output>
                     </div>
                 </form>
-                <!--<button>Filtry</button>
-                <ul id="filtry">
-                    <li>Data publikacji
-                        <input type="range">
-                    </li>
-                </ul>-->
                 <p id="description"></p>
             </div>
             <div id="filtry">
@@ -50,6 +48,16 @@
                     </div>
                 </div>
             </div>
+        </section>
+        <section id="formularz">
+            <form action="" id="kontakt">
+                <h1>Formularz kontaktowy</h1>
+                <input type="text" class="form-control" placeholder="Imię" id="imie" name="imie">
+                <input type="text" class="form-control" placeholder="Nazwisko" id="nazwisko" name="nazwisko">
+                <input type="mail" class="form-control" placeholder="Adres email" name="mail" id="mail">
+                <textarea class="form-control" rows="3" placeholder="Treść wiadomości"></textarea>
+                <input type="" name="" id="">
+            </form>
         </section>
     </div>
 </body>
