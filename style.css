@@ -2,9 +2,9 @@ body{
     padding: 0;
     margin: 0;
     height: 100%;
-    background: linear-gradient(300deg,#695f5f,#0c0b0b);
+    background: linear-gradient(300deg,#0c0b0b,#0c0b0b, #553e3e);
     background-size: 120% 120%;
-    animation: gradient-animation 5s ease infinite;
+    animation: gradient-animation 8s ease infinite;
     font-family: system-ui;
     background-size: cover;
     background-attachment: fixed;
@@ -50,14 +50,14 @@ body{
 #top-page:hover {
     background-color: rgb(73, 4, 8);
 }
-.arrow-5 {
+.arrow {
     width:30px;
     height:30px;
     display: grid;
     overflow: hidden;
     transform: rotate(270deg);
 }
-.arrow-5:before, .arrow-5:after {
+.arrow:before, .arrow:after {
     content: "";
     grid-area: 1/1;
     background: currentColor;
@@ -66,7 +66,7 @@ body{
     transform: translate(calc(0% + var(--s,0%)));
 }
 
-.arrow-5:after {
+.arrow:after {
     --s:-100%;
 }
 
@@ -163,7 +163,7 @@ h1:hover{
 }
 
 /* Wyszukiwarka */
-#form{
+#search-bar{
     transition: all 0.3s;
     width: 50%;
     display: flex;
@@ -194,25 +194,32 @@ h1:hover{
     top: 0;
     left: 0;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.466);
-    margin-top: 100px;
-    position: absolute;
+    background-color: rgb(0, 0, 0);
+    margin-top: 20px;
+    position: relative;
     display: none;
     flex-direction: column;
     justify-content: center;
     font-weight: 600;
+    border-radius: 30px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 #filters input{
-    width: auto;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
 }
 #filters output{
     color: white;
     text-align: center;
 }
 #filters p{
+    margin-left: auto;
+    margin-right: auto;
     color: rgb(107, 107, 107);
     padding: 0;
-    margin: 0;
 }
 #upload-range{
     margin-bottom: 20px;
@@ -280,6 +287,7 @@ h1:hover{
     margin-top: 20px;
 }
 
+
 /* Responsywność */
 @media (max-width: 480px){
     h1{
@@ -288,7 +296,13 @@ h1:hover{
     #videos .video-details{
         display: none;
     }
+    #videos .video-container{
+        width: 315px;
+        margin-left: auto;
+        margin-right: auto;
+    }
     #videos iframe{
+        display: flex;
         width: 315px;
         height: 200px;
     }
@@ -308,14 +322,7 @@ h1:hover{
     }
 }
 @media(max-width:1130px){
-    #videos{
-        justify-content: center;
-        align-items: center;
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        flex-direction: column;
-    }
+
 }
 
 

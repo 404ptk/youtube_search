@@ -22,17 +22,20 @@
             <h1>Wyszukaj film w serwisie&nbsp;<b>YouTube</b></h1>
             <div class="search">
                 <form id="form">
-                    <input type="text" class="form-control" id="search" placeholder="Podaj tytuł filmu">
-                    <input type="submit" class="btn btn-danger" value="🔎" id="search_icon">
+                    <div id="search-bar">
+                        <input type="text" class="form-control" id="search" placeholder="Podaj tytuł filmu">
+                        <input type="submit" class="btn btn-danger" value="🔎" id="search_icon">
+                    </div>
                     <div id="filters">
                         <label for="upload-range" class="form-label">Data publikacji</label>
                         <p>(Powstałe przed tą datą)</p>
                         <input type="date" id="upload-range" name="upload-range" value="2024-01-06" min="2018-01-01" max="2024-01-06">
 
                         <label for="max-results" class="form-label">Ilość wyników</label>
-                        <input type="range" class="form-range" id="max-results" value="5" min="1" max="10" step="1" oninput="this.nextElementSibling.value = this.value">
-                        <output id="max-results-output">5</output>
+                        <input type="range" class="form-range" id="max-results" value="5" min="1" max="11" step="1" oninput="this.nextElementSibling.value = this.value">
+                        <output id="max-results-output">6</output>
                     </div>
+                    
                 </form>
                 <p id="description"></p>
             </div>
@@ -64,7 +67,7 @@
             </form>
         </section>
     </div>
-    <button onclick="topFunction()" id="top-page" title="Go to top"><div class="arrow-5"></div></button>
+    <button onclick="topFunction()" id="top-page" title="Go to top"><div class="arrow"></div></button>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="script.js"></script>
