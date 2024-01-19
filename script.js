@@ -101,11 +101,33 @@ function filtry() {
 
 var contact = document.getElementById("formularz");
 contact.style.display = "none";
+contact.style.visibility = "hidden";
 
 function contact_form() {
-    if (contact.style.display == "none") {
+    if (contact.style.display == "none" || contact.style.visibility == "hidden") {
         contact.style.display = "block";
+        contact.style.visibility = "visible";
     } else {
         contact.style.display = "none";
+        contact.style.visibility = "hidden";
     }
+}
+let top_page_button = document.getElementById("top-page");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        top_page_button.style.visibility = "visible";
+        top_page_button.style.opacity = "1";
+    } else {
+        top_page_button.style.visibility = "hidden";
+        top_page_button.style.opacity = "0";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }
