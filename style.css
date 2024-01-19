@@ -196,18 +196,32 @@ h1:hover{
 
 /* Wyniki wyszukiwania */
 #videos{
-    display: grid;
+    display: block;
     grid-template-columns: repeat(3, 1fr);
     row-gap: 20px;
     place-items: center;
 }
-#videos iframe{
-    box-shadow: 0px 0px 10px rgb(0, 0, 0);
+#videos .video-details{
+    padding: 20px;
+    color: white;
+    margin-top: auto;
+    margin-bottom: auto;
+
 }
-#videos iframe:hover{
+.video-container{
+    box-shadow: 0px 0px 10px black;
+    background-color: rgba(0, 0, 0, 0.514);
+    display: flex;
+    flex-direction: row;
+}
+.video-container:hover{
     transition: all 0.15s ease-out;
     box-shadow: 0px 0px 15px rgb(177, 84, 84);
 }
+#videos hr{
+    margin-bottom: 30px;
+}
+
 /* Formularz kontaktowy */
 #kontakt{
     display: block;
@@ -224,8 +238,11 @@ h1:hover{
     h1{
         font-size: 100%;
     }
+    #videos .video-details{
+        display: none;
+    }
     #videos iframe{
-        width: 310px;
+        width: 315px;
         height: 200px;
     }
 }
@@ -282,3 +299,4 @@ h1:hover{
 		background-position: 0% 50%;
 	}
 }
+
