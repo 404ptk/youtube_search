@@ -211,6 +211,9 @@ h1:hover{
     margin-left: auto;
     margin-right: auto;
 }
+input[type=range]::-webkit-slider-thumb{
+    background-color: rgb(197, 75, 75);
+}
 #filters output{
     color: white;
     text-align: center;
