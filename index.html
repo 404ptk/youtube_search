@@ -17,7 +17,7 @@
             <ul>
                 <li><a href="https://youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i>&nbsp;YouTube</a></li>
                 <li><a href="https://github.com/404ptk" target="_blank"><i class="fa-brands fa-github"></i>&nbsp;Github</a></li>
-                <li><a class="read_more" target="articleiframe"><button onclick="contact_form()"><i class="fa-solid fa-phone"></i>&nbsp;Kontakt</button></a></li>
+                <li><a class="contact" target="contact_swipe"><button onclick="contact_form()"><i class="fa-solid fa-phone"></i>&nbsp;Kontakt</button></a></li>
             </ul>
         </div>
         <section id="searching">
@@ -58,7 +58,7 @@
         <section id="zgloszenie">
 
         </section>
-        <div id="slideiniframe" class="hide" name="articleiframe">
+        <div id="slidein" class="hide" name="contact_swipe">
             <form action="" id="kontakt">
                 <h1>Formularz kontaktowy</h1>
                 <input type="text" class="form-control" placeholder="Imię" id="name" name="name">
@@ -66,6 +66,7 @@
                 <input type="mail" class="form-control" placeholder="Adres email" name="mail" id="mail">
                 <textarea class="form-control" rows="3" placeholder="Treść wiadomości"></textarea>
                 <input type="file" name="file" id="file" class="btn btn-danger">
+                <input type="radio" checked disabled id="agree" name="agree"> <b>Zezwól na kontakt</b><br>
                 <input type="submit" id="submit" name="submit" class="btn btn-danger">
             </form>
         </div>

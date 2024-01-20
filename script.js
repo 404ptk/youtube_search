@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
 
         var search = document.getElementById("search").value;
-        if(!search.trim()){
-            alert("Wpisz frazę do wyszukiwania.")
-            console.log("Nie wpisano frazy do wyszukiwania.")
+        if (!search.trim()) {
+            alert("Wpisz frazę do wyszukiwania.");
+            console.log("Nie wpisano frazy do wyszukiwania.");
             return;
         }
 
@@ -42,6 +42,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Pobierz liczbę wyświetleń za pomocą osobnego żądania
                     var viewCount = await getViewCount(item.id.videoId);
 
+                    // Pobierz informacje o kanale za pomocą osobnego żądania
+                    var channelInfo = await getChannelInfo(item.snippet.channelId);
+
+                    // Pobierz opis filmu za pomocą osobnego żądania
+                    var videoDescription = await getVideoDescription(item.id.videoId);
+                    // Ogranicz opis filmu do 100 znaków
+                    videoDescription = videoDescription.substring(0, 100);
+                    if(videoDescription.length > 99){
+                        videoDescription = videoDescription.substring(0,99) + "...";
+                    }
+
                     // Formatuj liczbę wyświetleń
                     var formattedViewCount = formatViewCount(viewCount);
 
@@ -49,16 +60,17 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="video-container">
                             <iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoId}" frameborder="0" allowfullscreen></iframe>
                             <div class="video-details">
-                                <p><b>Tytuł:</b> ${title}</p>
-                                <p><b>Data dodania:</b> ${uploadDate}</p>
-                                <p><b>Wyświetlenia:</b> ${formattedViewCount}</p>
+                                <p><b id="title">${title}</b></p>
+                                <p id="channel"><img src="${channelInfo.avatar}" alt="Avatar kanału">&nbsp; ${channelInfo.title}</p>
+                                <p>${uploadDate} &#x2022; ${formattedViewCount} wyświetleń</p>
+                                <p id="description">${videoDescription}</p>
                             </div>
                         </div>
                         <hr>
                     `;
 
                     document.getElementById("videos").innerHTML += video;
-                    console.log("Wyświetlono wyniki wyszukiwania.")
+                    console.log("Wyświetlono wyniki wyszukiwania.");
                 });
             }
         };
@@ -75,6 +87,32 @@ document.addEventListener("DOMContentLoaded", function () {
         var viewCount = statisticsData.items.length > 0 ? statisticsData.items[0].statistics.viewCount : 'N/A';
 
         return viewCount;
+    }
+
+    async function getChannelInfo(channelId) {
+        // Pobierz informacje o kanale za pomocą osobnego żądania
+        var channelResponse = await fetch(`https://www.googleapis.com/youtube/v3/channels?id=${channelId}&part=snippet&key=${API_KEY}`);
+        var channelData = await channelResponse.json();
+
+        // Sprawdź, czy informacje o kanale są dostępne i pobierz tytuł kanału oraz URL do avataru
+        var channelTitle = channelData.items.length > 0 ? channelData.items[0].snippet.title : 'N/A';
+        var channelAvatar = channelData.items.length > 0 ? channelData.items[0].snippet.thumbnails.default.url : 'N/A';
+
+        return {
+            title: channelTitle,
+            avatar: channelAvatar
+        };
+    }
+
+    async function getVideoDescription(videoId) {
+        // Pobierz opis filmu za pomocą osobnego żądania
+        var videoResponse = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=snippet&key=${API_KEY}`);
+        var videoData = await videoResponse.json();
+
+        // Sprawdź, czy opis filmu jest dostępny i pobierz go
+        var description = videoData.items.length > 0 ? videoData.items[0].snippet.description : 'N/A';
+
+        return description;
     }
 
     function formatDate(dateString) {
@@ -94,13 +132,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    var slideiniframe = document.getElementById('slideiniframe');
+    var slidein = document.getElementById('slidein');
 
-    // Po kliknięciu w element o klasie 'read_more'
-    document.querySelector('.read_more').addEventListener('click', function (event) {
+    // Po kliknięciu w element o klasie 'contact'
+    document.querySelector('.contact').addEventListener('click', function (event) {
         // Przełącz między klasami 'show' i 'hide'
-        slideiniframe.classList.toggle('show');
-        slideiniframe.classList.toggle('hide');
+        slidein.classList.toggle('show');
+        slidein.classList.toggle('hide');
 
         // Zatrzymaj propagację zdarzenia, aby uniknąć zbędnych interakcji
         event.stopPropagation();
@@ -111,8 +149,14 @@ document.addEventListener("DOMContentLoaded", function () {
         // Po kliknięciu w dowolne miejsce w dokumencie
         document.querySelector('html').addEventListener('click', function () {
             // Dodaj klasę 'hide', usuń klasę 'show'
-            slideiniframe.classList.add('hide');
-            slideiniframe.classList.remove('show');
+            slidein.classList.add('hide');
+            slidein.classList.remove('show');
+        });
+
+        // Dodaj obsługę zdarzeń na formularzu
+        document.getElementById('slidein').addEventListener('click', function (event) {
+            // Zatrzymaj propagację zdarzenia, aby nie zamykać okna po kliknięciu w formularz
+            event.stopPropagation();
         });
     });
 });
@@ -130,7 +174,9 @@ function filtry() {
 
 let top_page_button = document.getElementById("top-page");
 
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () {
+    scrollFunction()
+};
 
 function scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -147,4 +193,3 @@ function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
-
