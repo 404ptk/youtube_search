@@ -7,6 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
 
         var search = document.getElementById("search").value;
+        if(!search.trim()){
+            alert("Wpisz frazę do wyszukiwania.")
+            console.log("Nie wpisano frazy do wyszukiwania.")
+            return;
+        }
+
         var results = document.getElementById("max-results").value;
         var before_date = document.getElementById("upload-range").value + "T00:00:00Z";
 
@@ -52,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     `;
 
                     document.getElementById("videos").innerHTML += video;
+                    console.log("Wyświetlono wyniki wyszukiwania.")
                 });
             }
         };

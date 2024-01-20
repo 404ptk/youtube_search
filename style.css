@@ -9,9 +9,13 @@ body{
     background-size: cover;
     background-attachment: fixed;
     scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 
 }
 .container{
+    flex: 1;
     margin: 0;
     padding: 0;
     margin-left: auto;
@@ -186,8 +190,16 @@ h1:hover{
 }
 #search{
     border-radius: 10px 0% 0% 10px;
-    transition: all 0.3s;
+    transition: all 0.3s ease-in-out;
 }
+#search-2{
+    font-weight: 600;
+    border-radius: 10px 0% 0% 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Alert */
+
 
 /* Menu filtrów */
 #filters{
@@ -253,11 +265,13 @@ input[type=date]::-webkit-calendar-picker-indicator{
     display: flex;
     justify-content: center;
 }
+
 #filtry-button{
     border-radius: 20px;
     transition: all 0.2s;
     width: 70px;
 }
+
 #filtry-button:hover{
     width: 80px;
     transition: all 0.2s;
@@ -309,7 +323,6 @@ input[type=date]::-webkit-calendar-picker-indicator{
     width: 100%;
 }
 
-
 .hide {
     overflow: hidden;
     width: 0%;
@@ -348,6 +361,35 @@ input[type=date]::-webkit-calendar-picker-indicator{
     right: 0;
     background-color: rgb(138, 73, 73);
     max-width: 800px;
+}
+
+/* Footer */
+footer{
+    background-color: rgba(62, 62, 63, 0.418);
+    color: rgb(255, 255, 255);
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    cursor: default;
+    justify-content: space-around;
+}
+footer:hover{
+    transition: all 0.15s ease-in-out;
+    background-color: rgba(62, 62, 63, 0.818);
+    opacity: 0.8;
+}
+
+footer p{
+    opacity: 0.418;
+    margin-top: auto;
+    padding-left: 10px;
+    margin-bottom: auto;
+}
+
+footer img{
+    position: absolute;
+    opacity: 0.418;
+    width: 48px;
 }
 
 /* Responsywność */
@@ -405,7 +447,16 @@ input[type=date]::-webkit-calendar-picker-indicator{
         width: 80%;
     }
 }
-
+@media(max-width: 520px){
+    h1{
+        font-size: 110%;
+    }
+}
+@media(max-width: 290px){
+    h1{
+        font-size: 80%;
+    }
+}
 
 
 
