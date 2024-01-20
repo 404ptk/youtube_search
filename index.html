@@ -8,18 +8,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="images/LogoUR.svg.ico">
+    <script src="https://kit.fontawesome.com/5babc094a0.js" crossorigin="anonymous"></script>
 </head>
 <body id="top">
     <div class="container">
         <div class="navbar">
             <ul>
-                <li><a href="https://youtube.com" target="_blank">YouTube</a></li>
-                <li><a href="https://github.com/404ptk" target="_blank">Github</a></li>
-                <li><a href="#formularz"><button onclick="contact_form()">Kontakt</button></a></li>
+                <li><a href="https://youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i>&nbsp;YouTube</a></li>
+                <li><a href="https://github.com/404ptk" target="_blank"><i class="fa-brands fa-github"></i>&nbsp;Github</a></li>
+                <li><a class="read_more" target="articleiframe"><button onclick="contact_form()"><i class="fa-solid fa-phone"></i>&nbsp;Kontakt</button></a></li>
             </ul>
         </div>
         <section id="searching">
-            <h1>Wyszukaj film w serwisie&nbsp;<b>YouTube</b></h1>
+            <h1>Wyszukaj film w serwisie&nbsp;<b>YouTube <i class="fa-brands fa-youtube"></i></b></h1>
             <div class="search">
                 <form id="form">
                     <div id="search-bar">
@@ -56,7 +57,7 @@
         <section id="zgloszenie">
 
         </section>
-        <section id="formularz">
+        <div id="slideiniframe" class="hide" name="articleiframe">
             <form action="" id="kontakt">
                 <h1>Formularz kontaktowy</h1>
                 <input type="text" class="form-control" placeholder="Imię" id="name" name="name">
@@ -65,7 +66,7 @@
                 <textarea class="form-control" rows="3" placeholder="Treść wiadomości"></textarea>
                 <input type="file" name="file" id="file" class="btn btn-danger">
             </form>
-        </section>
+        </div>
     </div>
     <button onclick="topFunction()" id="top-page" title="Go to top"><div class="arrow"></div></button>
 </body>

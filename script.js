@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var API_KEY = "AIzaSyCaHD8ew4SAagtZcgKmpcrc_AFvlP0zx18";
+    var API_KEY = "AIzaSyCeH84xNssZ3FplzEtwRS1AbX-h85FL0_g";
 
     var video = '';
 
@@ -86,6 +86,28 @@ document.addEventListener("DOMContentLoaded", function () {
             return count.toString();
         }
     }
+
+    var slideiniframe = document.getElementById('slideiniframe');
+
+    // Po kliknięciu w element o klasie 'read_more'
+    document.querySelector('.read_more').addEventListener('click', function (event) {
+        // Przełącz między klasami 'show' i 'hide'
+        slideiniframe.classList.toggle('show');
+        slideiniframe.classList.toggle('hide');
+
+        // Zatrzymaj propagację zdarzenia, aby uniknąć zbędnych interakcji
+        event.stopPropagation();
+    });
+
+    // Po załadowaniu okna
+    window.addEventListener('DOMContentLoaded', function () {
+        // Po kliknięciu w dowolne miejsce w dokumencie
+        document.querySelector('html').addEventListener('click', function () {
+            // Dodaj klasę 'hide', usuń klasę 'show'
+            slideiniframe.classList.add('hide');
+            slideiniframe.classList.remove('show');
+        });
+    });
 });
 
 var menu_filtrow = document.getElementById("filters");
@@ -99,19 +121,6 @@ function filtry() {
     }
 }
 
-var contact = document.getElementById("formularz");
-contact.style.display = "none";
-contact.style.visibility = "hidden";
-
-function contact_form() {
-    if (contact.style.display == "none" || contact.style.visibility == "hidden") {
-        contact.style.display = "block";
-        contact.style.visibility = "visible";
-    } else {
-        contact.style.display = "none";
-        contact.style.visibility = "hidden";
-    }
-}
 let top_page_button = document.getElementById("top-page");
 
 window.onscroll = function() {scrollFunction()};
@@ -131,3 +140,4 @@ function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+
