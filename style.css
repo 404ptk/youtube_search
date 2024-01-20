@@ -211,9 +211,23 @@ h1:hover{
     margin-left: auto;
     margin-right: auto;
 }
+
 input[type=range]::-webkit-slider-thumb{
     background-color: rgb(197, 75, 75);
 }
+input[type=range]::-webkit-slider-runnable-track{
+    background-color: rgb(71, 71, 71);
+}
+#upload-range{
+    background-color: rgb(71, 71, 71);
+    border: 0;
+    color: white;
+    padding: 0px 5px 0px 5px;
+}
+input[type=date]::-webkit-calendar-picker-indicator{
+    filter: invert(100%);
+}
+
 #filters output{
     color: white;
     text-align: center;
@@ -309,6 +323,9 @@ input[type=range]::-webkit-slider-thumb{
         width: 315px;
         height: 200px;
     }
+    #filters p{
+        font-size: 90%;
+    }
 }
 @media (max-width:240px){
     h1{
@@ -326,6 +343,11 @@ input[type=range]::-webkit-slider-thumb{
 }
 @media(max-width:1130px){
 
+}
+@media(max-width: 1001px){
+    #filters input{
+        width: 80%;
+    }
 }
 
 
