@@ -318,6 +318,7 @@ input[type=date]::-webkit-calendar-picker-indicator{
 #videos .video-details #description{
     color: grey;
     font-size: 80%;
+    cursor: default;
 }
 
 .video-container{
@@ -339,9 +340,10 @@ input[type=date]::-webkit-calendar-picker-indicator{
 #videos .video-details a{
     color: white;
     text-decoration: none;
-}
-#channel{
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 /* Formularz kontaktowy */
@@ -426,14 +428,15 @@ footer:hover{
 footer p{
     opacity: 0.418;
     margin-top: auto;
-    padding-left: 10px;
+    font-size: 85%;
     margin-bottom: auto;
+    text-align: center;
 }
 
 footer img{
     position: absolute;
     opacity: 0.418;
-    width: 48px;
+    height: 5vh;
 }
 
 /* Responsywność */
@@ -463,10 +466,9 @@ footer img{
     h1{
         display: block;
     }
-}
-@media(max-width: 370px){
-
-    
+    footer p{
+        display: none;
+    }
 }
 
 @media(max-width:1600px){
@@ -481,24 +483,33 @@ footer img{
     #kontakt{
         width: 80%;
     }
-}
-
-@media(max-width:1130px){
 
 }
+
 @media(max-width: 1001px){
     #filters input{
         width: 80%;
     }
 }
+
 @media(max-width: 520px){
     h1{
         font-size: 110%;
     }
+    #videos .video-details #upload_date{
+        display: none;
+    }
 }
+
 @media(max-width: 290px){
     h1{
         font-size: 80%;
+    }
+}
+
+@media(max-width: 770px){
+    #videos .video-details #description{
+        display: none;
     }
 }
 

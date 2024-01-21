@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var search = document.getElementById("search").value;
         if (!search.trim()) {
             alert("Wpisz frazę do wyszukiwania.");
-            console.log("Nie wpisano frazy do wyszukiwania.");
+            console.log("Nie wpisano frazy do wyszukania.");
             return;
         }
 
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <div class="video-details">
                                 <p><b id="title">${title}</b></p>
                                 <a id="channel" href="${channelLink}" target="_blank"><img src="${channelInfo.avatar}" alt="Avatar kanału">&nbsp; ${channelInfo.title}</a>
-                                <p>${uploadDate} &#x2022; ${formattedViewCount} wyświetleń</p>
+                                <p id="upload_date">${uploadDate} &#x2022; ${formattedViewCount} wyświetleń</p>
                                 <p id="description">${videoDescription}</p>
                             </div>
                         </div>
@@ -87,8 +87,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     `;
 
                     document.getElementById("videos").innerHTML += video;
-                    console.log("Wyświetlono wyniki wyszukiwania.");
+                    console.log("Wyświetlono film o tytule: " + title);
                 });
+                console.log("Wyświetlono wszystkie filmy.\nFiltry:\n\tIlość filmów: " + maxResults + "\n\tDodane przed datą: " + before_date);
             }
         };
 
@@ -210,3 +211,40 @@ function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+
+
+
+//local storage dla formularza
+const name = document.getElementById("name");
+const surname = document.getElementById("surname");
+const mail = document.getElementById("mail");
+const textmessage = document.getElementById("text-message");
+
+name.addEventListener("change", updateValue);
+surname.addEventListener("change", updateValue);
+mail.addEventListener("change", updateValue);
+textmessage.addEventListener("change", updateValue);
+
+try {
+    name.value = localStorage.getItem("name");
+    surname.value = localStorage.getItem("surname");
+    mail.value = localStorage.getItem("mail");
+    textmessage.value = localStorage.getItem("textmessage");
+} catch (error) {
+    console.error(error);
+}
+
+function updateValue(e) {
+    if (name.value.length < 1 || surname.value.length < 1 || mail.value.length < 1 || textmessage.value.length < 1) {
+        alert("Nie zostawiaj pustych miejsc");
+    } else {
+        console.log(e.target.value);
+        localStorage.setItem(e.target.id, e.target.value);
+        console.log(localStorage.getItem("name"));
+        console.log(localStorage.getItem("surname"));
+        console.log(localStorage.getItem("mail"));
+        console.log(localStorage.getItem("textmessage"));
+        console.log(localStorage);
+    }
+}
+
