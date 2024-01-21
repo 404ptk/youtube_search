@@ -12,7 +12,8 @@
 
 </head>
 <body id="top">
-    <div class="container">
+    <i id="loading" class="fa-solid fa-spinner fa-spin fa-2xl"></i>
+    <div class="container" hidden>
         <div class="navbar">
             <ul>
                 <li><a href="https://youtube.com" target="_blank"><i class="fa-brands fa-youtube"></i>&nbsp;YouTube</a></li>
@@ -46,6 +47,7 @@
             </div>
             <hr>
         </section>
+        
         <section id="player">
             <div class="row">
                 <div class="col-md-12">
@@ -71,14 +73,14 @@
             </form>
         </div>
     </div>
-    <footer>
+    <footer hidden>
         <img src="images/LogoUR.svg.ico" alt="urz">
         <p>Adam Kowalski</p>
         <p>email@gmail.com</p>
         <p>github.com/404ptk</p>
         <p>+48 600 900 500</p>
     </footer>
-    <button onclick="topFunction()" id="top-page" title="Go to top"><div class="arrow"></div></button>
+    <button hidden onclick="topFunction()" id="top-page" title="Go to top"><div class="arrow"></div></button>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="script.js"></script>
 </body>

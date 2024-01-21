@@ -1,5 +1,11 @@
+window.onload = function(){
+    document.getElementById("loading").remove()
+    document.querySelector(".container").removeAttribute("hidden")
+    document.querySelector("footer").removeAttribute("hidden")
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-    var API_KEY = "AIzaSyCeH84xNssZ3FplzEtwRS1AbX-h85FL0_g";
+    var API_KEY = "AIzaSyC_CVzKGFtLAqxNdAZ_EyLbL0VRGJ-FaMU";
 
     var video = '';
 
@@ -35,6 +41,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 var videoslist = data.items;
 
+                function getChannelLink(channelId) {
+                    if (channelId) {
+                        return `https://www.youtube.com/channel/${channelId}`;
+                    } else {
+                        return 'N/A';
+                    }
+                }
+
                 videoslist.forEach(async function (item) {
                     var title = item.snippet.title;
                     var uploadDate = formatDate(item.snippet.publishedAt);
@@ -47,11 +61,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // Pobierz opis filmu za pomocą osobnego żądania
                     var videoDescription = await getVideoDescription(item.id.videoId);
+                    
                     // Ogranicz opis filmu do 100 znaków
-                    videoDescription = videoDescription.substring(0, 100);
                     if(videoDescription.length > 99){
                         videoDescription = videoDescription.substring(0,99) + "...";
                     }
+
+                    // Uzyskaj link do kanału
+                    var channelLink = getChannelLink(item.snippet.channelId);
 
                     // Formatuj liczbę wyświetleń
                     var formattedViewCount = formatViewCount(viewCount);
@@ -61,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoId}" frameborder="0" allowfullscreen></iframe>
                             <div class="video-details">
                                 <p><b id="title">${title}</b></p>
-                                <p id="channel"><img src="${channelInfo.avatar}" alt="Avatar kanału">&nbsp; ${channelInfo.title}</p>
+                                <a id="channel" href="${channelLink}" target="_blank"><img src="${channelInfo.avatar}" alt="Avatar kanału">&nbsp; ${channelInfo.title}</a>
                                 <p>${uploadDate} &#x2022; ${formattedViewCount} wyświetleń</p>
                                 <p id="description">${videoDescription}</p>
                             </div>
