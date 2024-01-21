@@ -513,7 +513,25 @@ footer img{
     }
 }
 
-
+@media(max-height: 800px){
+    footer p{
+        font-size: 70%;
+    }
+}
+@media(max-height: 650px){
+    footer .footer-1{
+        display: inline-flex;
+        & p{
+            margin-left: 20px;
+        }
+    }
+    footer .footer-2{
+        display: inline-flex;
+        & p{
+            margin-left: 20px;
+        }
+    }
+}
 
 
 
