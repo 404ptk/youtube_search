@@ -182,6 +182,29 @@ h1:hover{
     left: 50%;
 }
 
+#loading-indicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -25px; /* połowa wysokości wskaźnika */
+    margin-left: -25px; /* połowa szerokości wskaźnika */
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid rgb(197, 75, 75);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    opacity: 1; /* Dodaj domyślną wartość */
+    display: none; /* ukryj na początku */
+}
+
+/* Zdefiniuj animację */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
 /* Wyszukiwarka */
 #search-bar{
     transition: all 0.3s;
@@ -345,6 +368,10 @@ input[type=date]::-webkit-calendar-picker-indicator{
     align-items: center;
     margin-bottom: 10px;
 }
+#videos .video-details a:hover{
+    transition: all 0.2s;
+    color: grey;
+}
 
 /* Formularz kontaktowy */
 #kontakt{
@@ -413,11 +440,17 @@ footer{
     z-index: 0;
     background-color: rgba(62, 62, 63, 0.418);
     color: rgb(255, 255, 255);
-    height: 5vh;
+    height: 7vh;
+    width: 40vh;
+    border-radius: 40px 40px 0px 0px;
     display: flex;
+    font-size: 90%;
     flex-direction: row;
     cursor: default;
+    place-items: center;
     justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
 }
 footer:hover{
     transition: all 0.15s ease-in-out;
@@ -436,7 +469,14 @@ footer p{
 footer img{
     position: absolute;
     opacity: 0.418;
-    height: 5vh;
+    height: 7vh;
+}
+
+footer .footer-1{
+    margin-right: 30px;
+}
+footer .footer-2{
+    margin-left: 20px;
 }
 
 /* Responsywność */
@@ -452,23 +492,19 @@ footer img{
         margin-left: auto;
         margin-right: auto;
     }
-    #videos iframe{
-        display: flex;
-        width: 315px;
-        height: 200px;
-    }
-    #filters p{
-        font-size: 90%;
-    }
 }
 
 @media (max-width:240px){
     h1{
         display: block;
     }
-    footer p{
-        display: none;
+
+}
+@media(max-width: 290px){
+    h1{
+        font-size: 80%;
     }
+
 }
 
 @media(max-width:1600px){
@@ -501,12 +537,6 @@ footer img{
     }
 }
 
-@media(max-width: 290px){
-    h1{
-        font-size: 80%;
-    }
-}
-
 @media(max-width: 770px){
     #videos .video-details #description{
         display: none;
@@ -514,23 +544,10 @@ footer img{
 }
 
 @media(max-height: 800px){
-    footer p{
-        font-size: 70%;
-    }
+
 }
 @media(max-height: 650px){
-    footer .footer-1{
-        display: inline-flex;
-        & p{
-            margin-left: 20px;
-        }
-    }
-    footer .footer-2{
-        display: inline-flex;
-        & p{
-            margin-left: 20px;
-        }
-    }
+
 }
 
 

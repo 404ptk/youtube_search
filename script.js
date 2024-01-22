@@ -1,39 +1,88 @@
+// specjalna animacja ładowania, trwa dopóki cały content strony się nie załaduje
 window.onload = function(){
     document.getElementById("loading").remove()
     document.querySelector(".container").removeAttribute("hidden")
     document.querySelector("footer").removeAttribute("hidden")
 }
 
+let i = 0;
+let placeholder = "";
+const txt = "Podaj tytuł filmu...";
+const speed = 120;
+
+if(i < txt.length){
+    function type(){
+        placeholder += txt.charAt(i);
+        document.getElementById("search").setAttribute("placeholder",placeholder);
+        i++;
+        setTimeout(type, speed);
+    }
+}
+type();
+
 document.addEventListener("DOMContentLoaded", function () {
+    // klucz api Youtube
     var API_KEY = "AIzaSyC_CVzKGFtLAqxNdAZ_EyLbL0VRGJ-FaMU";
 
+    // czyszczenie poprzedniego outputu, jeśli taki był
     var video = '';
 
+    // Pobierz element wskaźnika ładowania
+    var loadingIndicator = document.getElementById("loading-indicator");
+
+    // Po zakończeniu animacji (pełny obrót)
+    loadingIndicator.addEventListener("animationiteration", function () {
+        // Zmniejsz opacity do 0
+        loadingIndicator.style.opacity = "0";
+    });
+
+
+    // po kliknięciu przycisku Search
     document.getElementById("form").addEventListener("submit", function (event) {
         event.preventDefault();
 
+        // Pokaż wskaźnik ładowania
+        loadingIndicator.style.display = "block";
+
+        // Rozpocznij animację obrotu
+        loadingIndicator.style.animation = "spin 1s linear infinite";
+
         var search = document.getElementById("search").value;
-        if (!search.trim()) {
-            alert("Wpisz frazę do wyszukiwania.");
-            console.log("Nie wpisano frazy do wyszukania.");
-            return;
+        // sprawdzanie czy pole search jest puste
+        if(!search){
+            console.log("Podana fraza była pusta\nUżyto plików cookie do wyszukania defaultowej wartości.")
+            search = "Uniwersytet Rzeszowski";
+
+            // wykorzystanie elementów ciasteczek, aby przy pustym polu search nie była wyszukiwana losowa fraza
+            document.cookie = "defaultSearch=Uniwersytet Rzeszowski; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/";
         }
 
+        // pobieranie danych z filtrów 
         var results = document.getElementById("max-results").value;
         var before_date = document.getElementById("upload-range").value + "T00:00:00Z";
 
         document.getElementById("videos").innerHTML = '';
 
-        videoSearch(API_KEY, search, results, before_date);
+        // wywołanie funkcji videoSearch
+        videoSearch(API_KEY, search, results, before_date).then(() => {
+            // Ukryj wskaźnik ładowania po zakończeniu działania funkcji videoSearch
+            loadingIndicator.style.display = "none";
+            // Zresetuj opacity do 1
+            loadingIndicator.style.opacity = "1";
+        });
     });
 
     function videoSearch(key, search, maxResults, before_date) {
+        // utworzenie requesta do http
         var xhr = new XMLHttpRequest();
+        // wykorzystanie api youtube
+        // dokumentacja - https://developers.google.com/youtube/v3/docs?hl=pl
         xhr.open("GET", "https://www.googleapis.com/youtube/v3/search?key=" + key
             + "&type=video&part=snippet&maxResults=" + maxResults
             + "&order=viewCount" + "&publishedBefore=" + before_date
             + "&q=" + search, true);
 
+        // jeśli zmienił się stan w zapytaniu do serwera
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 var data = JSON.parse(xhr.responseText);
@@ -41,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 var videoslist = data.items;
 
+                // pobieranie linku do kanału twórcy filmu ze sprawdzaniem
                 function getChannelLink(channelId) {
                     if (channelId) {
                         return `https://www.youtube.com/channel/${channelId}`;
@@ -50,29 +100,33 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 videoslist.forEach(async function (item) {
+                    // pobieranie tytułu filmu
                     var title = item.snippet.title;
+
+                    // pobieranie daty uploadu filmu
                     var uploadDate = formatDate(item.snippet.publishedAt);
 
-                    // Pobierz liczbę wyświetleń za pomocą osobnego żądania
+                    // pobieranie liczby wyświetleń
                     var viewCount = await getViewCount(item.id.videoId);
 
-                    // Pobierz informacje o kanale za pomocą osobnego żądania
+                    // pobieranie nazwy kanału
                     var channelInfo = await getChannelInfo(item.snippet.channelId);
 
-                    // Pobierz opis filmu za pomocą osobnego żądania
+                    // pobieranie opisu filmu
                     var videoDescription = await getVideoDescription(item.id.videoId);
                     
-                    // Ogranicz opis filmu do 100 znaków
+                    // jeśli opis ma więcej niż 99 znaków, ograniczam go do 99 i dodaje na końcu "..."
                     if(videoDescription.length > 99){
                         videoDescription = videoDescription.substring(0,99) + "...";
                     }
 
-                    // Uzyskaj link do kanału
+                    // pobieranie linku do kanału autora
                     var channelLink = getChannelLink(item.snippet.channelId);
 
-                    // Formatuj liczbę wyświetleń
+                    // formatowanie liczby wyświetleń (np. zamiast 1230, to 1,2tys) za pomocą funkcji formatViewCount
                     var formattedViewCount = formatViewCount(viewCount);
 
+                    // ustawienie wyglądu każdego z osobna kafelka z nagraniem (reszta w css)
                     video = `
                         <div class="video-container">
                             <iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoId}" frameborder="0" allowfullscreen></iframe>
@@ -86,25 +140,32 @@ document.addEventListener("DOMContentLoaded", function () {
                         <hr>
                     `;
 
+                    // 
                     document.getElementById("videos").innerHTML += video;
                     console.log("Wyświetlono film o tytule: " + title);
                 });
                 console.log("Wyświetlono wszystkie filmy.\nFiltry:\n\tIlość filmów: " + maxResults + "\n\tDodane przed datą: " + before_date);
             }
         };
-
         xhr.send();
     }
 
-    async function getViewCount(videoId) {
-        // Pobierz liczbę wyświetleń za pomocą osobnego żądania
-        var statisticsResponse = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=statistics&key=${API_KEY}`);
-        var statisticsData = await statisticsResponse.json();
-
-        // Sprawdź, czy statystyki są dostępne i pobierz liczbę wyświetleń
-        var viewCount = statisticsData.items.length > 0 ? statisticsData.items[0].statistics.viewCount : 'N/A';
-
-        return viewCount;
+    // Promise
+    function getViewCount(videoId) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                // Pobierz liczbę wyświetleń za pomocą osobnego żądania
+                var statisticsResponse = await fetch(`https://www.googleapis.com/youtube/v3/videos?id=${videoId}&part=statistics&key=${API_KEY}`);
+                var statisticsData = await statisticsResponse.json();
+    
+                // Sprawdź, czy statystyki są dostępne i pobierz liczbę wyświetleń
+                var viewCount = statisticsData.items.length > 0 ? statisticsData.items[0].statistics.viewCount : 'N/A';
+    
+                resolve(viewCount);
+            } catch (error) {
+                reject(error);
+            }
+        });
     }
 
     async function getChannelInfo(channelId) {
@@ -150,15 +211,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Funkcja od animacji (slidera) formularzu kontaktowego
     var slidein = document.getElementById('slidein');
 
-    // Po kliknięciu w element o klasie 'contact'
+    // po kliknięciu przycisku
     document.querySelector('.contact').addEventListener('click', function (event) {
-        // Przełącz między klasami 'show' i 'hide'
+        // przełącz między klasami show i hide
         slidein.classList.toggle('show');
         slidein.classList.toggle('hide');
 
-        // Zatrzymaj propagację zdarzenia, aby uniknąć zbędnych interakcji
+        // zatrzymanie eventu, aby uniknac zbednych interakcji
         event.stopPropagation();
     });
 
@@ -179,6 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Funkcja od pokazywania menu filtrów za użyciem przycisku Filtry
 var menu_filtrow = document.getElementById("filters");
 menu_filtrow.style.display = "none";
 
@@ -190,6 +253,7 @@ function filtry() {
     }
 }
 
+// Funkcja która ukrywa/pokazuje przycisk Top, w zależności od obecnej pozycji na stronie
 let top_page_button = document.getElementById("top-page");
 
 window.onscroll = function () {
@@ -206,13 +270,11 @@ function scrollFunction() {
     }
 }
 
-// When the user clicks on the button, scroll to the top of the document
+// Funkcjonalność przycisku Top, która przerzuca na początek strony
 function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
-
-
 
 //local storage dla formularza
 const name = document.getElementById("name");
@@ -238,13 +300,13 @@ function updateValue(e) {
     if (name.value.length < 1 || surname.value.length < 1 || mail.value.length < 1 || textmessage.value.length < 1) {
         alert("Nie zostawiaj pustych miejsc");
     } else {
-        console.log(e.target.value);
-        localStorage.setItem(e.target.id, e.target.value);
         console.log(localStorage.getItem("name"));
         console.log(localStorage.getItem("surname"));
         console.log(localStorage.getItem("mail"));
         console.log(localStorage.getItem("textmessage"));
         console.log(localStorage);
+        // mógłbym tutaj dopisać inny program który faktycznie te dane będzie mi pobierał
+        // i wysyłał w inne miejsce, lecz nie obejmuje to oceny projektu
     }
 }
 
