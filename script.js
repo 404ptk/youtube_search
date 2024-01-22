@@ -297,16 +297,15 @@ try {
 }
 
 function updateValue(e) {
-    if (name.value.length < 1 || surname.value.length < 1 || mail.value.length < 1 || textmessage.value.length < 1) {
-        alert("Nie zostawiaj pustych miejsc");
-    } else {
-        console.log(localStorage.getItem("name"));
-        console.log(localStorage.getItem("surname"));
-        console.log(localStorage.getItem("mail"));
-        console.log(localStorage.getItem("textmessage"));
-        console.log(localStorage);
+    console.log(localStorage.getItem("name"));
+    console.log(localStorage.getItem("surname"));
+    console.log(localStorage.getItem("mail"));
+    console.log(localStorage.getItem("textmessage"));
+    console.log(localStorage);
         // mógłbym tutaj dopisać inny program który faktycznie te dane będzie mi pobierał
         // i wysyłał w inne miejsce, lecz nie obejmuje to oceny projektu
-    }
+    // if (name.value.length < 1 || surname.value.length < 1 || mail.value.length < 1 || textmessage.value.length < 1) {
+    //     alert("Nie zostawiaj pustych miejsc");
+    // } 
 }
 
