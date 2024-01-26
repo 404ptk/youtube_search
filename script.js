@@ -406,99 +406,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 event.stopPropagation();
             });
         });
-    
-        /**
-         * Element menu filtrów.
-         * @global
-         * @type {HTMLElement}
-         */
-        var menu_filtrow = document.getElementById("filters");
-    
-        /**
-         * Inicjalizacja stanu wyświetlania menu filtrów.
-         * @global
-         * @type {string}
-         */
-        menu_filtrow.style.display = "none";
-    
-        /**
-         * Przycisk "Top" przerzucający na początek strony.
-         * @global
-         * @type {HTMLElement}
-         */
-        let top_page_button = document.getElementById("top-page");
-    
-        /**
-         * Nasłuchiwacz na zdarzenie scrollowania strony.
-         * @global
-         * @event window#onscroll
-         */
-        window.onscroll = function () {
-            scrollFunction()
-        };
-    
-        /**
-         * Funkcja obsługująca przycisk "Top", przerzucająca na początek strony.
-         * @global
-         * @function
-         */
-        function topFunction() {
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
-        }
-    
-        /**
-         * Funkcja obsługująca zdarzenie scrollowania strony.
-         * @global
-         * @function
-         */
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                top_page_button.style.visibility = "visible";
-                top_page_button.style.opacity = "1";
-            } else {
-                top_page_button.style.visibility = "hidden";
-                top_page_button.style.opacity = "0";
-            }
-        }
-    
-        // Local storage dla formularza
-        const nameInput = document.getElementById("name");
-        const surnameInput = document.getElementById("surname");
-        const mailInput = document.getElementById("mail");
-        const textmessageInput = document.getElementById("text-message");
-    
-        // Pobranie danych z local storage po załadowaniu strony
-        window.addEventListener("DOMContentLoaded", function () {
-            try {
-                nameInput.value = localStorage.getItem("name") || "";
-                surnameInput.value = localStorage.getItem("surname") || "";
-                mailInput.value = localStorage.getItem("mail") || "";
-                textmessageInput.value = localStorage.getItem("textmessage") || "";
-            } catch (error) {
-                console.error(error);
-            }
-        });
-    
-        // Dodanie nasłuchiwaczy zmiany wartości dla pól formularza
-        nameInput.addEventListener("input", updateValue);
-        surnameInput.addEventListener("input", updateValue);
-        mailInput.addEventListener("input", updateValue);
-        textmessageInput.addEventListener("input", updateValue);
-    
-        /**
-         * Funkcja obsługująca zapisywanie danych formularza do local storage.
-         * @global
-         * @function
-         * @param {Event} e - Zdarzenie zmiany wartości w polu formularza.
-         */
-        function updateValue(e) {
-            localStorage.setItem("name", nameInput.value);
-            localStorage.setItem("surname", surnameInput.value);
-            localStorage.setItem("mail", mailInput.value);
-            localStorage.setItem("textmessage", textmessageInput.value);
-        }
-    
     });
     /**
          * Funkcja obsługująca pokazywanie/ukrywanie menu filtrów.
@@ -511,4 +418,94 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             filters.style.display = "none";
         }
+    }
+    /**
+         * Funkcja obsługująca przycisk "Top", przerzucająca na początek strony.
+         * @global
+         * @function
+         */
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
+    /**
+     * Funkcja obsługująca zdarzenie scrollowania strony.
+     * @global
+     * @function
+     */
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            top_page_button.style.visibility = "visible";
+            top_page_button.style.opacity = "1";
+        } else {
+            top_page_button.style.visibility = "hidden";
+            top_page_button.style.opacity = "0";
+        }
+    }
+    /**
+         * Element menu filtrów.
+         * @global
+         * @type {HTMLElement}
+         */
+    var menu_filtrow = document.getElementById("filters");
+    
+    /**
+     * Inicjalizacja stanu wyświetlania menu filtrów.
+     * @global
+     * @type {string}
+     */
+    menu_filtrow.style.display = "none";
+
+    /**
+     * Przycisk "Top" przerzucający na początek strony.
+     * @global
+     * @type {HTMLElement}
+     */
+    let top_page_button = document.getElementById("top-page");
+
+    /**
+     * Nasłuchiwacz na zdarzenie scrollowania strony.
+     * @global
+     * @event window#onscroll
+     */
+    window.onscroll = function () {
+        scrollFunction()
+    };
+
+    // Local storage dla formularza
+    const nameInput = document.getElementById("name");
+    const surnameInput = document.getElementById("surname");
+    const mailInput = document.getElementById("mail");
+    const textmessageInput = document.getElementById("text-message");
+
+    // Pobranie danych z local storage po załadowaniu strony
+    window.addEventListener("DOMContentLoaded", function () {
+        try {
+            nameInput.value = localStorage.getItem("name") || "";
+            surnameInput.value = localStorage.getItem("surname") || "";
+            mailInput.value = localStorage.getItem("mail") || "";
+            textmessageInput.value = localStorage.getItem("textmessage") || "";
+        } catch (error) {
+            console.error(error);
+        }
+    });
+
+    // Dodanie nasłuchiwaczy zmiany wartości dla pól formularza
+    nameInput.addEventListener("input", updateValue);
+    surnameInput.addEventListener("input", updateValue);
+    mailInput.addEventListener("input", updateValue);
+    textmessageInput.addEventListener("input", updateValue);
+
+    /**
+     * Funkcja obsługująca zapisywanie danych formularza do local storage.
+     * @global
+     * @function
+     * @param {Event} e - Zdarzenie zmiany wartości w polu formularza.
+     */
+    function updateValue(e) {
+        localStorage.setItem("name", nameInput.value);
+        localStorage.setItem("surname", surnameInput.value);
+        localStorage.setItem("mail", mailInput.value);
+        localStorage.setItem("textmessage", textmessageInput.value);
     }
