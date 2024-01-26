@@ -499,16 +499,16 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("textmessage", textmessageInput.value);
         }
     
-        /**
+    });
+    /**
          * Funkcja obsługująca pokazywanie/ukrywanie menu filtrów.
          * @global
          * @function
          */
-        function filtry() {
-            if (menu_filtrow.style.display == "none") {
-                menu_filtrow.style.display = "flex";
-            } else {
-                menu_filtrow.style.display = "none";
-            }
+    function filtry() {
+        if (filters.style.display == "none") {
+            filters.style.display = "flex";
+        } else {
+            filters.style.display = "none";
         }
-    });
+    }
