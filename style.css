@@ -128,7 +128,6 @@ body{
 }
 
 /* Ogólne */
-
 section{
     width: 100%;
     margin-bottom: 50px;
@@ -186,26 +185,23 @@ h1:hover{
     position: fixed;
     top: 50%;
     left: 50%;
-    margin-top: -25px; /* połowa wysokości wskaźnika */
-    margin-left: -25px; /* połowa szerokości wskaźnika */
+    margin-top: -25px; 
+    margin-left: -25px; 
     border: 5px solid #f3f3f3;
     border-top: 5px solid rgb(197, 75, 75);
     border-radius: 50%;
     width: 50px;
     height: 50px;
     animation: spin 1s linear infinite;
-    opacity: 1; /* Dodaj domyślną wartość */
-    display: none; /* ukryj na początku */
+    opacity: 1; 
+    display: none; 
 }
 
-/* Zdefiniuj animację */
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
-
-/* Wyszukiwarka */
 #search-bar{
     transition: all 0.3s;
     width: 50.6%;
@@ -236,9 +232,6 @@ h1:hover{
     border-radius: 10px 0% 0% 10px;
     transition: all 0.3s ease-in-out;
 }
-
-/* Alert */
-
 
 /* Menu filtrów */
 #filters{
