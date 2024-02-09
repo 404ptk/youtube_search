@@ -1,3 +1,21 @@
+
+/*
+Body
+
+Style dla całej strony internetowej.
+
+Markup:
+<body>
+    <p>Body automatycznie usuwa <i>margin</i> oraz <i>padding</i> ze strony, ustawia wysokość na 100%, aby tło było pełnej wysokości i szerokości.<br><br>
+    Display ustawiony na <i>flex column</i>, aby układ był w pionie.<br><br>
+    Ustawiono również <i>scroll-behavior</i> na <i>smooth</i> aby przy ewentualnym korzystaniu z przycisków manipulujących wysokością, wszystko odbywało się płynnie.<br><br>
+    Domyślna czcionka: <i>system-ui</i><br><br>
+    Aby edytować wygląd tła zmień kolory w: <i>background: linear-gradient(300deg,(kolor1),(kolor2), (kolor3))</i>
+    </p>
+</body>
+
+Style guide: 1.0
+*/
 body{
     padding: 0;
     margin: 0;
@@ -14,6 +32,31 @@ body{
     min-height: 100vh;
     opacity: 1;
 }
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+/*
+Kontener
+
+Style dla głównego kontenera strony.
+
+Markup:
+<div class="container">
+    <p>Kontener ustawia margin oraz padding na wartości zerowe<br>Środkuje elementy poziomo na stronie</p>
+</div>
+
+Styleguide: 2.0
+*/
 .container{
     flex: 1;
     margin: 0;
@@ -23,7 +66,20 @@ body{
     opacity: 1;
 }
 
-/* Scrollbar */
+/* 
+Scrollbar 
+
+Style dla scrollbaru oraz przycisku przenoszącego na góre strony
+
+Markup:
+Wygląd paska po prawej stronie ----------------------------------->
+<p>Przycisk do przenoszenia na górę przy połączeniu z JS znika gdy jesteśmy na samej górze strony.</p>
+<p>Edytor scrolla <b>nie działa</b> na przeglądarkach <b>Firefox</b>, ponieważ ignorują one manipulacje scrollbaru.</p>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<button onclick="topFunction()" id="top-page" style=visibility:visible title="Top"><div class="arrow"></div></button>
+
+Styleguide: 3.0
+*/
 ::-webkit-scrollbar {
     width: 10px;
     background: grey;
@@ -32,7 +88,6 @@ body{
     background: rgb(207, 207, 207);
     border-radius: 30px;
 }
-
 #top-page {
     visibility: hidden;
     display: block;
@@ -47,8 +102,6 @@ body{
     cursor: pointer;
     padding: 15px;
     border-radius: 15px;
-}
-#top-page{
     transition: all 0.2s ease-in-out;
 }
 
@@ -70,17 +123,33 @@ body{
     animation: a5 1s infinite;
     transform: translate(calc(0% + var(--s,0%)));
 }
-
 .arrow:after {
     --s:-100%;
 }
-
 @keyframes a5 {
     80%,100%{transform: translate(calc(100% + var(--s,0%)))}
 }
 
-/* Górne menu */
+/* 
+Górne menu 
+
+Style dla paska nawigującego
+
+Markup:
+<p>Pasek nawigacyjny, który zawsze trzyma się u samej góry strony.<br>Jeśli chcesz zmienić pasek tak, aby po przescrollowaniu w dół znikał<br>zmień position w .navbar na "absolute"</p>
+<div class="navbar">
+    <ul>
+        <li><a href="https://youtube.com" target="_blank" style=margin-top:-32px; margin-left:-52px><i class="fa-brands fa-youtube"></i>&nbsp;YouTube</a></li>
+        <li><a href="https://github.com/404ptk" target="_blank" style=margin-top:-32px; margin-left:-32px><i class="fa-brands fa-github"></i>&nbsp;Github</a></li>
+        <li><a class="contact" target="contact_swipe" style=margin-top:-32px; margin-left:-32px><button onclick="contact_form()"><i class="fa-solid fa-phone"></i>&nbsp;Kontakt</button></a></li>
+    </ul>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+Styleguide: 4.0
+*/
 .navbar{ 
+    /* główny pasek */
     left: 0;
     top: 0;
     width: 100%;
@@ -128,24 +197,29 @@ body{
     transition: all 0.1s ease-in-out;
 }
 
-/* Ogólne */
+/* 
+Ogólne 
+
+Wygląd poszczególnych elementów, które mogą się np. powtarzać, typu section
+
+Markup:
+<section>
+    <h1 style=color:black>Tekst</h1>
+    <hr>
+    <h1><b>Tekst 2</b></h1>
+</section>
+
+Styleguide: 5.0 
+*/
 section{
     width: 100%;
     margin-bottom: 50px;
 }
-
-#description{
-    display: flex;
-    color: white;
-    text-align: center;
-}
-
 hr{
     width: 100%;
     color: black;
     margin-top: 30px;
 }
-
 h1{
     margin-top: 50px;
     font-size: 200%;
@@ -166,6 +240,20 @@ h1:hover{
     letter-spacing: 1px;
 }
 
+/* 
+Ładowanie 
+
+Wygląd animacji ładowania strony (reszta w skrypcie JS)
+
+Markup:
+<i id="loading" class="fa-solid fa-spinner fa-spin fa-2xl"></i>
+<p>Tutaj wyświetla się ikona ładowania strony, pobierana z fontawesome, więc nie wyświetli się w tym dokumencie.<br>---------</p>
+<div id="loading-indicator" style=display:block></div>
+<p>Poniżej wyświetla się ikona zrobiona tylko podczas ładowania filmów<br><br><br><br><br><br><br><br><br><br></p>
+<p>Do edytowania koloru okręgu użyj:<br><i>- border-top: 5px solid (kolor główny obrotu);</i><br><i>- border: 5px solid (kolor w tle);</i>
+
+Styleguide: 6.0
+*/
 [hidden]{
     display: none;
 }
@@ -175,13 +263,6 @@ h1:hover{
     top: 50%;
     left: 50%;
 }
-#loading-2{
-    color: white;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-}
-
 #loading-indicator {
     position: fixed;
     top: 50%;
@@ -197,12 +278,33 @@ h1:hover{
     opacity: 1; 
     display: none; 
 }
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
+/* 
+Pasek wyszukiwania
+
+Style dla paska wyszukiwania nagrań (użyto również Bootstrap 5.3.2)
+
+Markup:
+Do pasku wyszukiwania użyto Bootstrap, na stronie wygląda inaczej.
+<section id="searching">
+    <h1 style=color:grey>Wyszukaj film w serwisie&nbsp;<b>YouTube <i class="fa-brands fa-youtube fa-shake" style="--fa-animation-duration: 3s;"></i></b></h1>
+    <div class="search">
+        <form id="form">
+            <div id="search-bar">
+                <input type="text" class="form-control" id="search">
+                <input type="submit" class="btn btn-danger" value="🔎" id="search_icon">
+            </div>
+        </form>
+        <p id="description"></p>
+    </div>
+</section>
+
+Styleguide: 7.0
+*/
 #search-bar{
     transition: all 0.3s;
     width: 50.6%;
@@ -210,11 +312,9 @@ h1:hover{
     margin-left: auto;
     margin-right: auto;
 }
-
 #searching{
     margin-top: 65px;
 }
-
 #search_icon{
     border-radius: 0% 30% 30% 0%;
     display: flex;
@@ -228,13 +328,32 @@ h1:hover{
     border-radius: 10px 0% 0% 10px;
     transition: all 0.3s ease-in-out;
 }
-#search-2{
-    font-weight: 600;
-    border-radius: 10px 0% 0% 10px;
-    transition: all 0.3s ease-in-out;
-}
 
-/* Menu filtrów */
+/* 
+Menu filtrów 
+
+Style dla okna z filtrami wyszukiwania (Użyto również Bootstrap 5.3.2)
+
+Markup:
+Do przycisku filtry oraz inputów użyto Bootstrap, na stronie wygląda inaczej.
+<div id="filters" style=display:flex;color:white;margin-bottom:20px>
+    <label for="upload-range" class="form-label">Data publikacji</label>
+    <p>(Powstałe przed tą datą)</p>
+    <input type="date" id="upload-range" name="upload-range" value="2024-01-21" min="2018-01-01" max="2024-01-21">
+    <label for="max-results" class="form-label">Ilość wyników</label>
+    <input type="range" class="form-range" id="max-results" value="6" min="1" max="11" step="1" oninput="this.nextElementSibling.value = this.value">
+    <output id="max-results-output">6</output>
+</div>
+<div id="filtry">
+    <button onclick="filtry()" class="btn btn-danger" id="filtry-button">Filtry</button>
+</div>
+<br>
+<p>Aby edytować tło i kolory tekstu w oknie filtrowym, należy zmienić w <u>#filters:</u></p>
+<p>Kolor napisu:<i> color: (kolor)</p></i>
+<p>Kolor tła:<i> background-color: (kolor)</p></i>
+
+Styleguide: 8.0
+*/
 #filters{
     top: 0;
     left: 0;
@@ -250,13 +369,13 @@ h1:hover{
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 #filters input{
     width: 30%;
     margin-left: auto;
     margin-right: auto;
 }
-
 input[type=range]::-webkit-slider-thumb{
     background-color: rgb(197, 75, 75);
 }
@@ -272,7 +391,6 @@ input[type=range]::-webkit-slider-runnable-track{
 input[type=date]::-webkit-calendar-picker-indicator{
     filter: invert(100%);
 }
-
 #filters output{
     color: white;
     text-align: center;
@@ -286,25 +404,21 @@ input[type=date]::-webkit-calendar-picker-indicator{
 #upload-range{
     margin-bottom: 20px;
 }
-
 #form label{
     color: white;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
 }
-
 #filtry{
     display: flex;
     justify-content: center;
 }
-
 #filtry-button{
     border-radius: 20px;
     transition: all 0.2s;
     width: 70px;
 }
-
 #filtry-button:hover{
     width: 80px;
     transition: all 0.2s;
@@ -312,7 +426,38 @@ input[type=date]::-webkit-calendar-picker-indicator{
     background-color: rgb(73, 4, 8);
 }
 
-/* Wyniki wyszukiwania */
+/* 
+Wyniki wyszukiwania
+
+Style dla kafelków z filmami
+
+Markup:
+<p>Wygląd kafelka:</p>
+<section id="player">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="videos">
+                <div class="video-container">
+                    <iframe width="420" height="315" src="http://www.youtube.com/embed/${item.id.videoId}" frameborder="0" allowfullscreen></iframe>
+                        <div class="video-details">
+                            <p><b id="title">${title}</b></p>
+                            <a id="channel" href="${channelLink}" target="_blank"><img src="${channelInfo.avatar}" alt="Avatar kanału">&nbsp; ${channelInfo.title}</a>
+                            <p id="upload_date">${uploadDate} &#x2022; ${formattedViewCount} wyświetleń</p>
+                            <p id="description">${videoDescription}</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<p>Aby zmienić poszczególne motywy należy zaglądnąć do:</p>
+<p>Dla tytułu filmu: <i> #title</p></i>
+<p>Dla nazwy kanału oraz avataru: <i> #channel</p></i>
+<p>Dla daty dodania: <i> #upload_date</p></i>
+<p>Dla opisu filmu: <i> #description</p></i>
+
+Styleguide: 9.0                
+*/
 #videos{
     display: block;
     grid-template-columns: repeat(3, 1fr);
@@ -337,23 +482,19 @@ input[type=date]::-webkit-calendar-picker-indicator{
     font-size: 80%;
     cursor: default;
 }
-
 .video-container{
     box-shadow: 0px 0px 10px black;
     background-color: rgba(0, 0, 0, 0.514);
     display: flex;
     flex-direction: row;
 }
-
 .video-container:hover{
     transition: all 0.15s ease-out;
     box-shadow: 0px 0px 15px rgb(177, 84, 84);
 }
-
 #videos hr{
     margin-bottom: 30px;
 }
-
 #videos .video-details a{
     color: white;
     text-decoration: none;
@@ -367,7 +508,28 @@ input[type=date]::-webkit-calendar-picker-indicator{
     color: grey;
 }
 
-/* Formularz kontaktowy */
+/* 
+Formularz kontaktowy
+
+Style dla formularza kontaktowego (Użyto również Bootstrap 5.3.2)
+
+Markup:
+Na stronie zaimplementowano skrypt który tworzy animacje między przejściami, <br>dodatkowo użyto również Bootstrap 5.3.2 do pól do wypełnienia oraz przycisków. <br>Finalny wynik na stronie jest lekko inny.
+<div id="slidein" class="show" name="contact_swipe">
+    <form action="#" method="GET" id="kontakt">
+        <h2>Formularz kontaktowy</h2>
+        <input type="text" class="form-control" placeholder="Imię" id="name" name="name" autofocus>
+        <input type="text" class="form-control" placeholder="Nazwisko" id="surname" name="surname">
+        <input type="mail" class="form-control" placeholder="Adres email" name="mail" id="mail">
+        <textarea class="form-control" rows="3" placeholder="Treść wiadomości" name="text-message" id="text-message"></textarea>
+        <input type="file" name="file" id="file" class="btn btn-danger">
+        <input type="radio" checked disabled id="agree" name="agree"> <b>Zezwól na kontakt</b><br>
+        <button onclick="updateValue()" type="button" id="submit" name="submit" class="btn btn-danger">Wyślij</button>
+    </form>
+</div>
+
+Styleguide: 10.0        
+*/
 #kontakt{
     margin: 40% auto 0px auto;
     display: block;
@@ -387,7 +549,6 @@ input[type=date]::-webkit-calendar-picker-indicator{
     color: white;
     cursor: default;
 }
-
 .hide {
     overflow: hidden;
     width: 0%;
@@ -416,7 +577,6 @@ input[type=date]::-webkit-calendar-picker-indicator{
     width: 34.45%;
     overflow: hidden;
 }
-
 #slidein {
     z-index: 1;
     height: 100%;
@@ -429,7 +589,30 @@ input[type=date]::-webkit-calendar-picker-indicator{
     max-width: 800px;
 }
 
-/* Footer */
+/* 
+Stopka
+
+Style dla footera
+
+Markup:
+<p style=text-align:center>Stopka wykorzystuje zdjęcie, dowolnej wielkości, w formacie .jpg lub .png.</p>
+<footer>
+    <img src="images/LogoUR.svg.ico" alt="urz">
+    <div class="footer-1">
+        <p>Adam Kowalski</p>
+        <p><i>email@gmail.com</i></p>
+    </div>
+    <div class="footer-2">
+        <p>github.com/404ptk</p>
+        <p><i>+48 600 900 500</i></p>
+    </div>
+</footer>
+<p>Stopka została podzielona na dwie klasy divów (<i>.footer-1 | .footer-2</i>) aby oddzielić od siebie dwie kolumny tekstów</p>
+<p>Aby zmienić funkcje/wygląd tekstu w footerze, należy edytować kod w "<i>footer p</i>"</p>
+<p>Aby zmienić wygląd tła stopki, należy edytować kod w "<i>footer</i>"</p>
+
+Styleguide: 11.0
+*/
 footer{
     z-index: 0;
     background-color: rgba(62, 62, 63, 0.418);
@@ -451,7 +634,6 @@ footer:hover{
     background-color: rgba(62, 62, 63, 0.818);
     opacity: 0.8;
 }
-
 footer p{
     opacity: 0.418;
     margin-top: auto;
@@ -459,20 +641,17 @@ footer p{
     margin-bottom: auto;
     text-align: center;
 }
-
 footer img{
     position: absolute;
     opacity: 0.418;
     height: 7vh;
 }
-
 footer .footer-1{
     margin-right: 30px;
 }
 footer .footer-2{
     margin-left: 20px;
 }
-
 footer #additionalbackground-bottom{
     position: absolute;
     width: 100%;
@@ -480,7 +659,45 @@ footer #additionalbackground-bottom{
     opacity: 0.2;
 }
 
-/* Responsywność */
+/* 
+Responsywność
+
+Zmiany w wyglądzie na podstawie szerokości/wysokości
+
+Markup:
+<h2>Dla szerokości 0-240px</h2>
+<p>h1 - display:block</p>
+<h2>Dla szerokości 241-290px</h2>
+<p>h1 - font-size: 80%</p>
+<h2>Dla szerokości 291-480px</h2>
+<p>h1 - font-size: 100%</p>
+<p>#videos .video-details - display: none</p>
+<p>#videos .video-container - width: 315px + środkowanie elementu</p>
+<h2>Dla szerokości 481-520px</h2>
+<p>h1 - font-size: 110%</p>
+<p>#videos .video-details #upload_date - display: none</p>
+<h2>Dla szerokości 521-700px</h2>
+<p>#kontakt - width: 80%</p>
+<h2>Dla szerokości 701-770px</h2>
+<p>#videos .video-details #description - display: none</p>
+<h2>Dla szerokości 721-1001px</h2>
+<p>#filters input - width: 80%</p>
+<h2>Dla szerokości 1002-1600px</h2>
+<p>#videos - grid-template-columns: repeat(2, 1fr)</p>
+<p>.show - width: 80%</p>
+
+Styleguide: 12.0
+*/
+@media (max-width:240px){
+    h1{
+        display: block;
+    }
+}
+@media(max-width: 290px){
+    h1{
+        font-size: 80%;
+    }
+}
 @media (max-width: 480px){
     h1{
         font-size: 100%;
@@ -494,41 +711,6 @@ footer #additionalbackground-bottom{
         margin-right: auto;
     }
 }
-
-@media (max-width:240px){
-    h1{
-        display: block;
-    }
-
-}
-@media(max-width: 290px){
-    h1{
-        font-size: 80%;
-    }
-
-}
-
-@media(max-width:1600px){
-    #videos{
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .show{
-        width: 80%;
-    }
-}
-@media(max-width:700px){
-    #kontakt{
-        width: 80%;
-    }
-
-}
-
-@media(max-width: 1001px){
-    #filters input{
-        width: 80%;
-    }
-}
-
 @media(max-width: 520px){
     h1{
         font-size: 110%;
@@ -537,31 +719,26 @@ footer #additionalbackground-bottom{
         display: none;
     }
 }
-
+@media(max-width:700px){
+    #kontakt{
+        width: 80%;
+    }
+}
 @media(max-width: 770px){
     #videos .video-details #description{
         display: none;
     }
 }
-
-@media(max-height: 800px){
-
+@media(max-width: 1001px){
+    #filters input{
+        width: 80%;
+    }
 }
-@media(max-height: 650px){
-
+@media(max-width:1600px){
+    #videos{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .show{
+        width: 80%;
+    }
 }
-
-
-
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-
