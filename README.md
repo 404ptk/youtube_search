@@ -13,4 +13,4 @@ Brief Description
 
 This makes it easy to explore content directly from the app interface.
 
-# Built with HTML, CSS, and JavaScript, the application features a smooth loading animation and a typing effect for the search placeholder, enhancing user experience. <br>Whether you're looking for specific content or just browsing, this tool streamlines the process of finding YouTube videos tailored to your needs.
+##### Built with HTML, CSS, and JavaScript, the application features a smooth loading animation and a typing effect for the search placeholder, enhancing user experience. <br>Whether you're looking for specific content or just browsing, this tool streamlines the process of finding YouTube videos tailored to your needs.
