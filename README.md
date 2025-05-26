@@ -6,12 +6,13 @@ This project allows users to find relevant content quickly and efficiently.
 
 ## How It Works
 This app leverages the YouTube Data API to fetch video content based on user input. Simply enter a search term, set a maximum number of results, and filter by upload date to discover videos that match your criteria. Results are displayed with detailed information including:
-
-Title
-Upload Date
-View Count
-Channel Details
-Brief Description
+<ul>
+  <li>Title</li>
+  <li>Upload Date</li>
+  <li>View Count</li>
+  <li>Channel Details</li>
+  <li>Brief Description</li>
+</ul>
 
 This makes it easy to explore content directly from the app interface.
 
