@@ -2,6 +2,8 @@
 A simple and intuitive web application for searching YouTube videos with custom filters like publication date and result limits. 
 This project allows users to find relevant content quickly and efficiently.
 
+[Screen](screen.png)
+
 ## How It Works
 This app leverages the YouTube Data API to fetch video content based on user input. Simply enter a search term, set a maximum number of results, and filter by upload date to discover videos that match your criteria. Results are displayed with detailed information including:
 
